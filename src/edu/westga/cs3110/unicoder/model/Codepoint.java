@@ -37,7 +37,8 @@ public class Codepoint {
 	 * @return
 	 */
 	public String toUTF32() {
-		return null;
+		int parsed = Integer.parseUnsignedInt(this.hexadecimal, 16);
+		return String.format("%08X", parsed);
 	}
 	
 	/**

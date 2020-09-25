@@ -100,5 +100,20 @@ public class Codepoint {
 	 */
 	public String toUTF8() {
 		int parsed = Integer.parseUnsignedInt(this.codepoint, 16);
+		if (parsed < 0x80) {
+			return String.format("%02X", parsed);
+		} else if (parsed > 0x007F && parsed < 0x0800) {
+			int upperByte = 0b11000000 + (parsed >> 6);
+			int lowerByte = 0b10000000 + (parsed & 0b00000111111);
+			return String.format("%04X", (upperByte << 8) + lowerByte);
+		} else if (parsed > 0x07FF && parsed < 0x10000) {
+			int byteOne = 0b11100100;
+			int byteTwo = 0b10000000;
+			int byteThree = 0b10000000;
+			return String.format("%06X", );
+		} else {
+			return String.format("%08X", );
+		}
+		
 	}
 }
